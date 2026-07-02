@@ -2,6 +2,7 @@ package com.swkmspringcart.GoCart.service.product;
 
 import com.swkmspringcart.GoCart.model.Product;
 import com.swkmspringcart.GoCart.request.AddProductRequest;
+import com.swkmspringcart.GoCart.request.ProductUpdateRequest;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface IProductService {
     Product addProduct(AddProductRequest product);
     Product getProductById(Long id);
     void deleteProductById(Long id);
-    void updateProduct(Product product, Long productId);
+    Product updateProduct(ProductUpdateRequest product, Long productId);
     List<Product> getALLProducts();
     List<Product> getProductsByCategory(String category);
     List<Product> getProductsByBrand(String brand);
