@@ -27,7 +27,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ImageController {
     private final ImageService imageService;
 
-    @PostMapping("/uplaod")
+    @PostMapping("/upload")
     public ResponseEntity<ApiResponse> saveImages(@RequestParam List<MultipartFile> files,@RequestParam Long productId){
         try {
             List<ImageDto> imageDtos = imageService.saveImages(files, productId);

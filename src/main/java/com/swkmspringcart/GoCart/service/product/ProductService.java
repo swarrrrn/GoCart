@@ -1,14 +1,19 @@
 package com.swkmspringcart.GoCart.service.product;
 
 
+import com.swkmspringcart.GoCart.dto.ImageDto;
+import com.swkmspringcart.GoCart.dto.ProductDto;
 import com.swkmspringcart.GoCart.exceptions.ResourceNotFoundException;
 import com.swkmspringcart.GoCart.model.Category;
+import com.swkmspringcart.GoCart.model.Image;
 import com.swkmspringcart.GoCart.model.Product;
 import com.swkmspringcart.GoCart.repository.CategoryRepository;
+import com.swkmspringcart.GoCart.repository.ImageRepository;
 import com.swkmspringcart.GoCart.repository.ProductRepository;
 import com.swkmspringcart.GoCart.request.AddProductRequest;
 import com.swkmspringcart.GoCart.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +24,8 @@ import java.util.Optional;
 public class ProductService implements IProductService{
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final ModelMapper modelMapper;
+    private final ImageRepository imageRepository;
 
     @Override
     public Product addProduct(AddProductRequest request) {
@@ -112,5 +119,19 @@ public class ProductService implements IProductService{
     @Override
     public Long countProductsByBrandAndName(String brand, String name) {
         return productRepository.countByBrandAndName(brand,name);
+    }
+
+    @Override
+    public List<ProductDto> getConvertedProducts(List<Product> products){
+        return products.stream().map(this::convertToDto).toList();
+    }
+
+    @Override
+    public ProductDto convertToDto(Product product){
+        ProductDto productDto = modelMapper.map(product,ProductDto.class);
+        List<Image> images = imageRepository.findByProductId(product.getId());
+        List<ImageDto> imageDtos = images.stream().map(image -> modelMapper.map(image,ImageDto.class)).toList();
+        productDto.setImages(imageDtos);
+        return productDto;
     }
 }

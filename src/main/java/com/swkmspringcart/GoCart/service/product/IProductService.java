@@ -1,5 +1,6 @@
 package com.swkmspringcart.GoCart.service.product;
 
+import com.swkmspringcart.GoCart.dto.ProductDto;
 import com.swkmspringcart.GoCart.model.Product;
 import com.swkmspringcart.GoCart.request.AddProductRequest;
 import com.swkmspringcart.GoCart.request.ProductUpdateRequest;
@@ -19,4 +20,7 @@ public interface IProductService {
     List<Product> getProductsByBrandAndName(String brand, String name);
     Long countProductsByBrandAndName(String brand, String name);
 
+    List<ProductDto> getConvertedProducts(List<Product> products);
+
+    ProductDto convertToDto(Product product);
 }
