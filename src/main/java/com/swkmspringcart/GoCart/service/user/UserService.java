@@ -60,6 +60,4 @@ public class UserService implements IUserService{
     public UserDto convertUserToDto(User user) {
         return modelMapper.map(user, UserDto.class);
     }
-
-
 }

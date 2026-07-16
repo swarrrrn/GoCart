@@ -1,6 +1,8 @@
 package com.swkmspringcart.GoCart.service.cart;
 
+import com.swkmspringcart.GoCart.dto.CartDto;
 import com.swkmspringcart.GoCart.model.Cart;
+import com.swkmspringcart.GoCart.model.User;
 
 import java.math.BigDecimal;
 
@@ -9,7 +11,8 @@ public interface ICartService {
     void clearCart(Long id);
     BigDecimal getTotalPrice(Long id);
 
-    Long initializeNewCart();
+    Cart initializeNewCart(User user);
 
     Cart getCartByUserId(Long userId);
+
 }

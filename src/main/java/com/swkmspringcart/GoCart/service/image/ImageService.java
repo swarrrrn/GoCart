@@ -50,14 +50,14 @@ public class ImageService implements IImageService{
 
                 String buildDownloadUrl = "/api/v1/images/image/download/";
                 String downloadUrl = buildDownloadUrl+image.getId();
-                image.setDownloadURL(downloadUrl);
+                image.setDownloadUrl(downloadUrl);
                 Image savedImage = imageRepository.save(image);
-                savedImage.setDownloadURL(buildDownloadUrl+savedImage.getId());
+                savedImage.setDownloadUrl(buildDownloadUrl+savedImage.getId());
                 imageRepository.save(savedImage);
                 ImageDto imageDto = new ImageDto();
                 imageDto.setId(savedImage.getId());
                 imageDto.setFileName(savedImage.getFileName());
-                imageDto.setDownloadUrl(savedImage.getDownloadURL());
+                imageDto.setDownloadUrl(savedImage.getDownloadUrl());
                 savedImageDto.add(imageDto);
             }catch(IOException | SQLException e){
                 throw new RuntimeException(e.getMessage());

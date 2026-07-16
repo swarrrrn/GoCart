@@ -23,9 +23,9 @@ public class Image {
 
     @Lob
     private Blob image;
-    private String downloadURL;
+    private String downloadUrl;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnore
     private Product product;
 }
