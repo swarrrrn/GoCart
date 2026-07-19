@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.security.SignatureException;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +21,9 @@ public class JwtUtils {
     @Value("${auth.token.expirationInMils}")
     private int expirationTime;
 
-    private String generateTokenForUser(Authentication authentication){
+    public String generateTokenForUser(Authentication authentication){
         ShopUserDetails userPrincipal = (ShopUserDetails) authentication.getPrincipal();
+
 
         List<String> roles = userPrincipal.getAuthorities()
                 .stream()
