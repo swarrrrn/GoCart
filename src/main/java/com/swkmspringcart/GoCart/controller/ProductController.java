@@ -1,6 +1,7 @@
 package com.swkmspringcart.GoCart.controller;
 
 import com.swkmspringcart.GoCart.dto.ProductDto;
+import com.swkmspringcart.GoCart.exceptions.AlreadyExistsException;
 import com.swkmspringcart.GoCart.exceptions.ResourceNotFoundException;
 import com.swkmspringcart.GoCart.model.Product;
 import com.swkmspringcart.GoCart.request.AddProductRequest;
@@ -45,7 +46,7 @@ public class ProductController {
         try {
             Product theProduct = productService.addProduct(product);
             return ResponseEntity.ok(new ApiResponse("Add product success", theProduct));
-        } catch (Exception e) {
+        } catch (AlreadyExistsException e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(),null));
         }
     }
